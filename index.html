@@ -18,7 +18,7 @@
              --brown-light: #6D6258;
              --card: #FFFFFF;
              --shadow: 0 8px 28px rgba(61, 50, 43, 0.08);
-             --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+             --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
          }
 
          * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -33,26 +33,25 @@
              overflow-x: hidden;
          }
 
-         /* 入场动画 */
+         /* 动画关键帧 */
+         @keyframes slideDown {
+             from { opacity: 0; transform: translateY(-20px); }
+             to   { opacity: 1; transform: translateY(0); }
+         }
+
          @keyframes fadeInUp {
-             from { opacity: 0; transform: translateY(28px); }
-             to { opacity: 1; transform: translateY(0); }
+             from { opacity: 0; transform: translateY(30px); }
+             to   { opacity: 1; transform: translateY(0); }
          }
 
          @keyframes scaleIn {
              from { opacity: 0; transform: scale(0.92); }
-             to { opacity: 1; transform: scale(1); }
+             to   { opacity: 1; transform: scale(1); }
          }
 
          @keyframes float {
              0%, 100% { transform: translateY(0); }
-             50% { transform: translateY(-6px); }
-         }
-
-         @keyframes pulse-ring {
-             0% { box-shadow: 0 0 0 0 rgba(184, 125, 94, 0.25); }
-             70% { box-shadow: 0 0 0 12px rgba(184, 125, 94, 0); }
-             100% { box-shadow: 0 0 0 0 rgba(184, 125, 94, 0); }
+             50% { transform: translateY(-5px); }
          }
 
          @keyframes gradientFlow {
@@ -61,31 +60,19 @@
              100% { background-position: 0% 50%; }
          }
 
-         .animate {
-             opacity: 0;
-             animation-fill-mode: forwards;
+         @keyframes qrPulse {
+             0%   { opacity: 0; transform: scale(0.96); }
+             30%  { opacity: 0.35; }
+             100% { opacity: 0; transform: scale(1.04); }
          }
 
-         .fade-in-up {
-             animation-name: fadeInUp;
-             animation-duration: 0.8s;
-             animation-timing-function: var(--ease-out);
+         @keyframes softBounce {
+             0%   { opacity: 0; transform: scale(0.9); }
+             60%  { transform: scale(1.03); }
+             100% { opacity: 1; transform: scale(1); }
          }
 
-         .scale-in {
-             animation-name: scaleIn;
-             animation-duration: 0.7s;
-             animation-timing-function: var(--ease-out);
-         }
-
-         .delay-1 { animation-delay: 0.1s; }
-         .delay-2 { animation-delay: 0.2s; }
-         .delay-3 { animation-delay: 0.35s; }
-         .delay-4 { animation-delay: 0.5s; }
-         .delay-5 { animation-delay: 0.65s; }
-         .delay-6 { animation-delay: 0.8s; }
-         .delay-7 { animation-delay: 1s; }
-
+         /* 顶部 banner */
          .top-banner {
              background: linear-gradient(160deg, #F7EDE2 0%, #F5E6D3 50%, #EDE0D0 100%);
              background-size: 200% 200%;
@@ -93,7 +80,7 @@
              text-align: center;
              border-bottom-left-radius: 28px;
              border-bottom-right-radius: 28px;
-             animation: gradientFlow 12s ease infinite;
+             animation: gradientFlow 12s ease infinite, slideDown 0.6s var(--ease-out) both;
          }
 
          .shop-name {
@@ -108,6 +95,7 @@
              border-radius: 999px;
              margin-bottom: 14px;
              box-shadow: 0 2px 8px rgba(184, 125, 94, 0.10);
+             animation: scaleIn 0.5s 0.1s var(--ease-out) both;
          }
 
          h1 {
@@ -116,11 +104,13 @@
              color: var(--brown);
              margin-bottom: 6px;
              letter-spacing: 0;
+             animation: fadeInUp 0.6s 0.2s var(--ease-out) both;
          }
 
          .tagline {
              font-size: 14px;
              color: var(--brown-light);
+             animation: fadeInUp 0.6s 0.3s var(--ease-out) both;
          }
 
          .container {
@@ -135,6 +125,7 @@
              gap: 10px;
              margin-bottom: 24px;
              flex-wrap: wrap;
+             animation: fadeInUp 0.5s 0.4s var(--ease-out) both;
          }
 
          .step {
@@ -170,6 +161,10 @@
              text-align: center;
          }
 
+         .card:first-of-type {
+             animation: fadeInUp 0.6s 0.5s var(--ease-out) both;
+         }
+
          .card-header {
              margin-bottom: 18px;
          }
@@ -188,12 +183,23 @@
 
          .qr-frame {
              display: inline-block;
+             position: relative;
              background: #fff;
              border: 1px solid #EDE5DB;
              border-radius: 16px;
              padding: 10px;
              box-shadow: 0 4px 14px rgba(61, 50, 43, 0.05);
-             animation: pulse-ring 2.4s infinite;
+         }
+
+         .qr-frame::after {
+             content: "";
+             position: absolute;
+             inset: -6px;
+             border-radius: 22px;
+             border: 2px solid var(--accent);
+             opacity: 0;
+             animation: qrPulse 2.4s 1.2s ease-out infinite;
+             pointer-events: none;
          }
 
          .qr-frame img {
@@ -216,7 +222,7 @@
              padding: 11px 22px;
              border-radius: 999px;
              box-shadow: 0 4px 14px rgba(184, 125, 94, 0.25);
-             animation: float 3s ease-in-out infinite;
+             animation: softBounce 0.5s 0.8s var(--ease-out) both, float 3s 1.3s ease-in-out infinite;
          }
 
          .hint {
@@ -229,6 +235,7 @@
              background: #F8F9F7;
              border: 1px solid #E8E5E1;
              box-shadow: none;
+             animation: fadeInUp 0.6s 0.7s var(--ease-out) both;
          }
 
          .card-alt .card-title {
@@ -237,14 +244,17 @@
 
          .card-alt .qr-frame {
              border-color: #DDE5E8;
-             animation: pulse-ring 2.4s infinite;
+         }
+
+         .card-alt .qr-frame::after {
+             border-color: var(--secondary);
+             animation-delay: 1.4s;
          }
 
          .card-alt .action-pill {
              background: var(--secondary);
              box-shadow: 0 4px 14px rgba(107, 142, 159, 0.20);
-             animation: float 3s ease-in-out infinite;
-             animation-delay: 0.6s;
+             animation: softBounce 0.5s 1s var(--ease-out) both, float 3s 1.5s ease-in-out infinite;
          }
 
          .divider {
@@ -254,6 +264,7 @@
              margin: 6px 0 18px;
              color: #B0A69C;
              font-size: 12px;
+             animation: fadeInUp 0.5s 0.6s var(--ease-out) both;
          }
 
          .divider::before, .divider::after {
@@ -269,18 +280,7 @@
              font-size: 12px;
              color: #A69B90;
              line-height: 1.8;
-         }
-
-         /* 滚动触发：简单轻量，预留扩展 */
-         .reveal {
-             opacity: 0;
-             transform: translateY(28px);
-             transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
-         }
-
-         .reveal.visible {
-             opacity: 1;
-             transform: translateY(0);
+             animation: fadeInUp 0.5s 0.8s var(--ease-out) both;
          }
 
          @media (prefers-reduced-motion: reduce) {
@@ -301,19 +301,19 @@
  <body>
 
      <div class="top-banner">
-         <div class="shop-name animate scale-in delay-1">🛏️ 床上用品店</div>
-         <h1 class="animate fade-in-up delay-2">盛达布业</h1>
-         <p class="tagline animate fade-in-up delay-3">床单被罩 · 凉席蚊帐 · 电热毯 · 到货实拍通知</p>
+         <div class="shop-name">🛏️ 床上用品店</div>
+         <h1>盛达布业</h1>
+         <p class="tagline">床单被罩 · 凉席蚊帐 · 电热毯 · 到货实拍通知</p>
      </div>
 
      <div class="container">
          <div class="steps">
-             <div class="step animate scale-in delay-4"><span class="step-num">1</span>长按二维码</div>
-             <div class="step animate scale-in delay-5"><span class="step-num">2</span>识别图中二维码</div>
-             <div class="step animate scale-in delay-6"><span class="step-num">3</span>加入群聊</div>
+             <div class="step"><span class="step-num">1</span>长按二维码</div>
+             <div class="step"><span class="step-num">2</span>识别图中二维码</div>
+             <div class="step"><span class="step-num">3</span>加入群聊</div>
          </div>
 
-         <div class="card animate fade-in-up delay-5">
+         <div class="card">
              <div class="card-header">
                  <div class="card-title">📸 床品到货实拍群</div>
                  <div class="card-subtitle">新到床单、被罩、枕巾、枕套、凉席、电热毯、蚊帐等，第一时间拍照发群，看中再来店里取</div>
@@ -322,12 +322,12 @@
                  <img src="qrcode_a_20260811.png" alt="床品到货群二维码" width="277" height="400">
              </div>
              <div class="action-pill">👆 长按识别二维码加群</div>
-             <div class="hint animate fade-in-up delay-6">若提示群已满，请用下方方式联系老板</div>
+             <div class="hint">若提示群已满，请用下方方式联系老板</div>
          </div>
 
-         <div class="divider animate fade-in-up delay-6">备用通道</div>
+         <div class="divider">备用通道</div>
 
-         <div class="card card-alt animate fade-in-up delay-7">
+         <div class="card card-alt">
              <div class="card-header">
                  <div class="card-title">🙋 群满或过期？</div>
                  <div class="card-subtitle">添加老板微信，手动拉您进群，或直接发图看款</div>
@@ -339,28 +339,10 @@
          </div>
      </div>
 
-     <div class="footer animate fade-in-up delay-7">
+     <div class="footer">
          群二维码每周更新 · 欢迎街坊邻里常来逛逛<br>
          床品看好了再来取，省心又方便
      </div>
 
-     <script>
-         // 滚动Reveal：简单轻量，不影响首屏入场动画
-         document.addEventListener('DOMContentLoaded', function() {
-             var reveals = document.querySelectorAll('.reveal');
-             if (!reveals.length) return;
-
-             var observer = new IntersectionObserver(function(entries) {
-                 entries.forEach(function(entry) {
-                     if (entry.isIntersecting) {
-                         entry.target.classList.add('visible');
-                         observer.unobserve(entry.target);
-                     }
-                 });
-             }, { threshold: 0.1 });
-
-             reveals.forEach(function(el) { observer.observe(el); });
-         });
-     </script>
  </body>
  </html>
