@@ -1,0 +1,96 @@
+  <!DOCTYPE html>
+  <html lang="zh-CN">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0,
+  maximum-scale=1.0, user-scalable=no">
+      <title>扫码加入福利群</title>
+      <style>
+          * { margin: 0; padding: 0; box-sizing: border-box; }
+          body {
+              font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  "Helvetica Neue", Arial, sans-serif;
+              background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+              min-height: 100vh;
+              padding: 20px 15px;
+          }
+          .header {
+              text-align: center;
+              color: #fff;
+              padding: 25px 0 15px;
+          }
+          .header h1 { font-size: 24px; margin-bottom: 6px; }
+          .header p { font-size: 14px; opacity: 0.9; }
+
+          .card {
+              background: #fff;
+              border-radius: 16px;
+              padding: 24px 20px;
+              margin-bottom: 20px;
+              box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+              text-align: center;
+          }
+          .card .title {
+              font-size: 20px;
+              font-weight: bold;
+              color: #333;
+              margin-bottom: 4px;
+          }
+          .card .subtitle {
+              font-size: 13px;
+              color: #999;
+              margin-bottom: 16px;
+          }
+          .card img {
+              width: 80%;
+              max-width: 260px;
+              height: auto;
+              border-radius: 8px;
+          }
+          .card .action {
+              margin-top: 14px;
+              font-size: 15px;
+              color: #f5576c;
+              font-weight: bold;
+          }
+
+          .boss-card { border: 2px dashed #f5576c; }
+
+          .footer {
+              text-align: center;
+              color: #fff;
+              padding: 10px 0 30px;
+              font-size: 12px;
+              opacity: 0.75;
+          }
+      </style>
+  </head>
+  <body>
+
+      <div class="header">
+          <h1>🏪 店铺福利群</h1>
+          <p>长按二维码 → 识别图中二维码 → 加入群聊</p>
+      </div>
+
+      <!-- A群 -->
+      <div class="card">
+          <div class="title">🔥 福利群</div>
+          <div class="subtitle">红包福利、优惠活动第一时间通知</div>
+          <img src="qrcode_a.png" alt="福利群二维码">
+          <div class="action">👆 长按识别二维码加入</div>
+      </div>
+
+      <!-- 老板微信 -->
+      <div class="card boss-card">
+          <div class="title">💬 群满或过期？</div>
+          <div class="subtitle">添加老板微信，手动拉你进群</div>
+          <img src="qrcode_b.png" alt="老板微信二维码">
+          <div class="action">👆 长按识别二维码添加好友</div>
+      </div>
+
+      <div class="footer">
+          群二维码每7天更新 · 有问题请联系老板
+      </div>
+
+  </body>
+  </html>
